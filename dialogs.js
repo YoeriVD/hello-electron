@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 module.exports = {
   showMessage,
-  showSaveDialog
+  showSaveDialog,
+  showOpenDialog
 };
 function showMessage(browserWindow) {
   dialog.showMessageBox(
@@ -37,6 +38,26 @@ function showSaveDialog(browserWindow) {
             dialog.showErrorBox('Save failed.', err.message);
           }
         });
+      }
+    }
+  );
+}
+
+function showOpenDialog(browserWindow) {
+  dialog.showOpenDialog(
+    browserWindow,
+    {
+      defaultPath: app.getPath('downloads'),
+      filters: [
+        {
+          name: 'Text files',
+          extensions: ['txt']
+        }
+      ]
+    },
+    filePaths => {
+      if (filePaths) {
+        console.log(filePaths, fs.readFileSync(filePaths[0], 'utf8'));
       }
     }
   );
