@@ -11,5 +11,5 @@ app.on('ready', () => {
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
   });
-  setMainMenu();
+  setMainMenu(mainWindow);
 });
