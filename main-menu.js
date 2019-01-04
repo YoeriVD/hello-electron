@@ -1,5 +1,5 @@
 const { app, Menu } = require('electron');
-const { showMessage } = require('./dialogs');
+const { showMessage, showSaveDialog } = require('./dialogs');
 const isWindows = process.platform == 'win32';
 
 module.exports = {
@@ -17,7 +17,12 @@ function setMainMenu(mainWindow) {
             showMessage(mainWindow);
           }
         },
-        { label: 'Save memory usage info', click() {} },
+        {
+          label: 'Save memory usage info',
+          click() {
+            showSaveDialog(mainWindow);
+          }
+        },
         {
           label: isWindows ? 'Exit' : `Quit ${app.getName()}`,
           accelerator: isWindows ? 'Alt+F4' : 'CmdOrCtrl+Q',
